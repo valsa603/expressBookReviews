@@ -110,5 +110,22 @@ public_users.get('/async/author/:author', async function (req, res) {
         });
     }
 });
+public_users.get('/async/title/:title', async function (req, res) {
+    try {
+  
+      const title = req.params.title;
+  
+      const response = await axios.get(
+        `http://localhost:5000/title/${title}`
+      );
+  
+      return res.status(200).json(response.data);
+  
+    } catch (error) {
+      return res.status(500).json({
+        message: "Error retrieving books by title"
+      });
+    }
+  });
 
 module.exports.general = public_users;
