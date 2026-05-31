@@ -80,5 +80,20 @@ public_users.get('/async/books', async function (req, res) {
         });
     }
 });
+public_users.get('/async/isbn/:isbn', async function (req, res) {
+    try {
+        const isbn = req.params.isbn;
+
+        const response = await axios.get(
+            `http://localhost:5000/isbn/${isbn}`
+        );
+
+        return res.status(200).json(response.data);
+    } catch (error) {
+        return res.status(500).json({
+            message: "Error retrieving book"
+        });
+    }
+});
 
 module.exports.general = public_users;
