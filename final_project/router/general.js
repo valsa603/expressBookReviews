@@ -95,5 +95,20 @@ public_users.get('/async/isbn/:isbn', async function (req, res) {
         });
     }
 });
+public_users.get('/async/author/:author', async function (req, res) {
+    try {
+        const author = req.params.author;
+
+        const response = await axios.get(
+            `http://localhost:5000/author/${author}`
+        );
+
+        return res.status(200).json(response.data);
+    } catch (error) {
+        return res.status(500).json({
+            message: "Error retrieving books by author"
+        });
+    }
+});
 
 module.exports.general = public_users;
